@@ -31,4 +31,18 @@
 .tv-show__cover {
   margin-top: 1rem;
   width: 4rem;
+}
+
+.add-show-form__input-container {
+  margin: 0.75rem 0;
+}
+.add-show-form__title-error, .add-show-form__image-url-error, .add-show-form__rating-error {
+  border: 1px solid red;
+  background-color: lightsalmon;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  display: none;
+}
+.add-show-form__error--show {
+  display: inline;
 }/*# sourceMappingURL=styles.css.map */

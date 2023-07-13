@@ -33,30 +33,38 @@ const tvShows = [
         title: "Rick & Morty",
         rating: 10,
         imageSrc: "/assets/images/rick-and-morty.png"
-    }
+    },
+    // Add new tv show here?
+    // render it to the page somehow, using createTvShowElement
 ]
 
-/* Add all TV Shows to the tv-shows element */
-const tvShowsEl = document.getElementById("tv-shows");
-for (let i = 0; i <= tvShows.length - 1; i++) {
-    const showEl = createTvShowElement(tvShows[i]);
+function displayShows() {
+    /* Add all TV Shows to the tv-shows element */
+    const tvShowsEl = document.getElementById("tv-shows");
+    tvShowsEl.innerHTML = "";
 
-    showEl.addEventListener("click", function(event) {
-        const favShow = document.querySelector(".tv-show--favourited");
+    for (let i = 0; i <= tvShows.length - 1; i++) {
+        const showEl = createTvShowElement(tvShows[i]);
 
-        if (favShow === null) {
-            event.target.classList.add("tv-show--favourited");
-        } else {
-            favShow.classList.remove("tv-show--favourited");
+        showEl.addEventListener("click", function(event) {
+            const favShow = document.querySelector(".tv-show--favourited");
 
-            if (favShow !== event.target) {
+            if (favShow === null) {
                 event.target.classList.add("tv-show--favourited");
-            }
-        }
-    })
+            } else {
+                favShow.classList.remove("tv-show--favourited");
 
-    tvShowsEl.appendChild(showEl);
+                if (favShow !== event.target) {
+                    event.target.classList.add("tv-show--favourited");
+                }
+            }
+        })
+
+        tvShowsEl.appendChild(showEl);
+    }
 }
+
+displayShows();
 
 /*
     Input: show will contain { Title, Rating, Image }
@@ -91,3 +99,55 @@ function createTvShowElement(show) {
 
     return showEl;
 }
+
+
+/*
+GOAL: create new tv show element with the input information
+*/
+const form = document.getElementById("add-show");
+form.addEventListener("submit", function(event) {      
+    event.preventDefault();
+
+    const errors = document.querySelectorAll(".add-show-form__error--show");
+    errors.forEach(errorEl => {
+        errorEl.classList.remove("add-show-form__error--show");
+    })
+
+    const title = event.target.title.value;
+    const rating = event.target.rating.value;
+    const imageUrl = event.target.imageUrl.value;
+
+    let hasErrors = false;
+    
+    if (title === "") {
+        hasErrors = true
+        // show error in dom
+        const errorEl = document
+            .querySelector(".add-show-form__title-error");
+        errorEl.classList.add("add-show-form__error--show");
+    }
+
+    if (imageUrl === "") {
+        hasErrors = true;
+        const errorEl = document
+            .querySelector(".add-show-form__image-url-error");
+        errorEl.classList.add("add-show-form__error--show");
+    }
+        
+    if (hasErrors) {
+      // -> stop processing the form
+      return ;
+    } 
+
+    // form is valid! Process the info now
+    const newShow = {
+        title: title,
+        rating: rating,
+        imageSrc: imageUrl
+    }
+
+    tvShows.unshift(newShow);
+    displayShows();
+
+    event.target.reset();
+})

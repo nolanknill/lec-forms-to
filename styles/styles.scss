@@ -36,3 +36,22 @@
         width: 4rem;
     }
 }
+
+.add-show-form {
+    &__input-container {
+        margin: 0.75rem 0;
+    }
+
+    &__title-error, &__image-url-error, &__rating-error {
+        border:1px solid red;
+        background-color: lightsalmon;
+        border-radius: 0.25rem;
+        padding: 0.25rem;
+        display: none;
+    }
+
+    &__error--show {
+        display: inline;
+    }
+        
+}
