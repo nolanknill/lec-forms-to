@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+.tv-shows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tv-show {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  background-color: #ddd;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 0.25rem solid #ddd;
+  cursor: pointer;
+}
+.tv-show:hover {
+  border-color: goldenrod;
+}
+.tv-show--favourited {
+  border-color: gold;
+}
+.tv-show__title {
+  margin: 0;
+}
+.tv-show__cover {
+  margin-top: 1rem;
+  width: 4rem;
+}/*# sourceMappingURL=styles.css.map */
